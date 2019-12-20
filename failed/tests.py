@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 
 from wagtail.tests.utils import WagtailPageTests
+from wagtail.core.rich_text import RichText
 
 from home.models import HomePage
 from failed.models import FailedIndexPage, FailedPage
@@ -32,16 +33,24 @@ class TestFailedPage(WagtailPageTests):
     def test_parent_page_types(self):
         self.assertAllowedParentPageTypes(FailedPage, [FailedIndexPage])
 
-    def test_fail(self):
-        page = FailedPage(fail="<p>failed fail</p>")
-        self.assertEqual(page.fail, '<p>failed fail</p>')
+    def test_quote(self):
+        page = FailedPage(quote="failed quote")
+        self.assertEqual(page.quote, 'failed quote')
 
-    def test_fail_cannot_be_blank(self):
+    def test_can_be_blank(self):
         page = FailedPage()
-        with self.assertRaises(ValidationError) as ve:
-            page.full_clean()
+        try:
+            page.clean_fields(
+                exclude=['path', 'depth', 'title', 'slug', 'lessons_learned'])
+        except:
+            self.fail('blank quote should not raise on validation')
 
-        self.assertIn('fail', ve.exception.error_dict)
+    def test_fail(self):
+        page = FailedPage(fail=[('paragraph', RichText('<p>failed fail</p>'))])
+        self.assertEqual(page.fail.render_as_block(),
+                         '<div class="block-paragraph">' \
+                         '<div class="rich-text"><p>failed fail</p>' \
+                         '</div></div>')
 
     def test_lessons_learned(self):
         page = FailedPage(lessons_learned="<p>failed lessons learned</p>")
@@ -50,6 +59,6 @@ class TestFailedPage(WagtailPageTests):
     def test_lessons_learned_cannot_be_blank(self):
         page = FailedPage()
         with self.assertRaises(ValidationError) as ve:
-            page.full_clean()
+            page.clean_fields()
 
         self.assertIn('lessons_learned', ve.exception.error_dict)
