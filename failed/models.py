@@ -61,6 +61,7 @@ class FailedPage(Page):
     ]
 
     parent_page_types = ['failed.FailedIndexPage']
+    subpage_types = []
 
 
 @register_snippet

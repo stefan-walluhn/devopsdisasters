@@ -34,6 +34,9 @@ class TestFailedPage(WagtailPageTests):
     def test_parent_page_types(self):
         self.assertAllowedParentPageTypes(FailedPage, [FailedIndexPage])
 
+    def test_sub_page_types(self):
+        self.assertAllowedSubpageTypes(FailedPage, [])
+
     def test_quote(self):
         page = FailedPage(quote="failed quote")
         self.assertEqual(page.quote, 'failed quote')
