@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-failedpage{% endblock %}
+
+{% block content %}
+  <h1>{{ page.title }}</h1>
+
+  <p class="meta">{{ page.first_published_at }}</p>
+
+  {% if page.quote %}
+  <div class="quote"><p>{{ page.quote }}</p></div>
+  {% endif %}
+
+  <div class="fail">
+    {% include_block page.fail %}
+  </div>
+
+  <h2>Lessons learned?</h2>
+  <div class="lessons-learned">{{ page.lessons_learned|richtext }}</div>
+{% endblock %}

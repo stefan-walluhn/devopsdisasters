@@ -1,2 +1,16 @@
+# django
 db.sqlite3
 static/
+media/
+
+# python
+__pycache__
+
+# pip
+pip-selfcheck.json
+
+# virtualenv
+bin/
+include/
+lib/
+lib64

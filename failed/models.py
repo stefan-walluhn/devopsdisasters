@@ -1,11 +1,16 @@
-from django.db.models import CharField
+from django.db.models import CharField, Model
+from django.forms import CheckboxSelectMultiple
 
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from modelcluster.fields import ParentalManyToManyField
+
+from wagtail.admin.edit_handlers import (
+    FieldPanel, StreamFieldPanel, MultiFieldPanel)
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 
 class FailedIndexPage(Page):
@@ -30,6 +35,7 @@ class FailedIndexPage(Page):
 
 class FailedPage(Page):
     quote = CharField(max_length=250, blank=True)
+    categories = ParentalManyToManyField('failed.FailedCategory', blank=True)
     fail = StreamField([
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -46,9 +52,27 @@ class FailedPage(Page):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('quote'),
-        StreamFieldPanel('fail'),
-        FieldPanel('lessons_learned'),
+        FieldPanel('categories', widget=CheckboxSelectMultiple),
+        MultiFieldPanel([
+            FieldPanel('quote'),
+            StreamFieldPanel('fail'),
+            FieldPanel('lessons_learned'),
+        ], heading="content"),
     ]
 
     parent_page_types = ['failed.FailedIndexPage']
+
+
+@register_snippet
+class FailedCategory(Model):
+    class Meta:
+        verbose_name_plural = 'failed categories'
+
+    name = CharField(max_length=250)
+
+    panels = [
+        FieldPanel('name'),
+    ]
+
+    def __str__(self):
+        return self.name
