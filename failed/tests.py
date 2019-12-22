@@ -1,11 +1,11 @@
 from django.core.exceptions import ValidationError
-from django.test import TestCase
 
 from wagtail.core.rich_text import RichText
 from wagtail.tests.utils import WagtailPageTests
 
+from categories.models import Category
 from home.models import HomePage
-from failed.models import FailedIndexPage, FailedPage, FailedCategory
+from failed.models import FailedIndexPage, FailedPage
 
 
 class TestFailedIndexPage(WagtailPageTests):
@@ -68,20 +68,6 @@ class TestFailedPage(WagtailPageTests):
         self.assertIn('lessons_learned', ve.exception.error_dict)
 
     def test_category(self):
-        category = FailedCategory(name="failed category name")
+        category = Category(name="failed category name")
         page = FailedPage(categories=[category])
         self.assertListEqual(list(page.categories.all()), [category])
-
-
-class TestFailedCategory(TestCase):
-    def test_category(self):
-        category = FailedCategory()
-        self.assertIsInstance(category, FailedCategory)
-
-    def test_to_str(self):
-        category = FailedCategory(name="failed category name")
-        self.assertEqual(str(category), 'failed category name')
-
-    def test_name(self):
-        category = FailedCategory(name="failed category name")
-        self.assertEqual(category.name, 'failed category name')

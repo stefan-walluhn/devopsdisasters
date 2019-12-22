@@ -1,4 +1,4 @@
-from django.db.models import CharField, Model
+from django.db import models
 from django.forms import CheckboxSelectMultiple
 
 from modelcluster.fields import ParentalManyToManyField
@@ -10,7 +10,6 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
-from wagtail.snippets.models import register_snippet
 
 
 class FailedIndexPage(Page):
@@ -34,8 +33,8 @@ class FailedIndexPage(Page):
 
 
 class FailedPage(Page):
-    quote = CharField(max_length=250, blank=True)
-    categories = ParentalManyToManyField('failed.FailedCategory', blank=True)
+    quote = models.CharField(max_length=250, blank=True)
+    categories = ParentalManyToManyField('categories.Category', blank=True)
     fail = StreamField([
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -62,18 +61,3 @@ class FailedPage(Page):
 
     parent_page_types = ['failed.FailedIndexPage']
     subpage_types = []
-
-
-@register_snippet
-class FailedCategory(Model):
-    class Meta:
-        verbose_name_plural = 'failed categories'
-
-    name = CharField(max_length=250)
-
-    panels = [
-        FieldPanel('name'),
-    ]
-
-    def __str__(self):
-        return self.name
