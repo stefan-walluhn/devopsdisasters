@@ -13,7 +13,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('wagtailcore', '0041_group_collection_permissions_verbose_name_plural'),
+        ('wagtailcore',
+         '0041_group_collection_permissions_verbose_name_plural'),
         ('categories', '0001_initial'),
     ]
 
@@ -21,7 +22,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FailedIndexPage',
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(
+                    auto_created=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    parent_link=True,
+                    primary_key=True,
+                    serialize=False,
+                    to='wagtailcore.Page')),
                 ('intro', wagtail.core.fields.RichTextField()),
             ],
             options={
@@ -32,11 +39,26 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FailedPage',
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(
+                    auto_created=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    parent_link=True,
+                    primary_key=True,
+                    serialize=False,
+                    to='wagtailcore.Page')),
                 ('quote', models.CharField(blank=True, max_length=250)),
-                ('fail', wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('example_code', wagtail.core.blocks.StructBlock([('code', wagtail.core.blocks.BlockQuoteBlock()), ('source', wagtail.core.blocks.URLBlock(required=False))]))])),
+                ('fail', wagtail.core.fields.StreamField([
+                    ('paragraph', wagtail.core.blocks.RichTextBlock()),
+                    ('image', wagtail.images.blocks.ImageChooserBlock()),
+                    ('example_code', wagtail.core.blocks.StructBlock([
+                        ('code', wagtail.core.blocks.BlockQuoteBlock()),
+                        ('source', wagtail.core.blocks.URLBlock(
+                            required=False))
+                    ]))
+                ])),
                 ('lessons_learned', wagtail.core.fields.RichTextField()),
-                ('categories', modelcluster.fields.ParentalManyToManyField(blank=True, to='categories.Category')),
+                ('categories', modelcluster.fields.ParentalManyToManyField(
+                    blank=True, to='categories.Category')),
             ],
             options={
                 'abstract': False,
