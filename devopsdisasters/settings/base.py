@@ -25,10 +25,10 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     'devopsdisasters.base',
-    'categories',
-    'failed',
-    'home',
-    'search',
+    'devopsdisasters.categories',
+    'devopsdisasters.failed',
+    'devopsdisasters.home',
+    'devopsdisasters.search',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',

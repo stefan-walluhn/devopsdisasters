@@ -3,9 +3,9 @@ from django.core.exceptions import ValidationError
 from wagtail.core.rich_text import RichText
 from wagtail.tests.utils import WagtailPageTests
 
-from categories.models import Category
-from home.models import HomePage
-from failed.models import FailedIndexPage, FailedPage
+from devopsdisasters.categories.models import Category
+from devopsdisasters.home.models import HomePage
+from devopsdisasters.failed.models import FailedIndexPage, FailedPage
 
 
 class TestFailedIndexPage(WagtailPageTests):

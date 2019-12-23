@@ -1,6 +1,6 @@
 from wagtail.tests.utils import WagtailPageTests
 
-from home.models import HomePage
+from devopsdisasters.home.models import HomePage
 
 
 class TestHomePage(WagtailPageTests):

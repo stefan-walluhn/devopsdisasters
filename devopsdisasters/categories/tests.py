@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from categories.models import Category
+from devopsdisasters.categories.models import Category
 
 
 class TestFailedCategory(TestCase):
