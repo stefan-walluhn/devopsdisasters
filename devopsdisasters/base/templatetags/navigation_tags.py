@@ -19,9 +19,9 @@ def has_menu_children(page):
     return page.get_children().live().in_menu().exists()
 
 
-# Retrieves the top menu items - the immediate children of the parent page
-# The has_menu_children method is necessary because the Foundation menu requires
-# a dropdown class to be applied to a parent
+# Retrieves the top menu items - the immediate children of the parent page The
+# has_menu_children method is necessary because the Foundation menu requires a
+# dropdown class to be applied to a parent
 @register.inclusion_tag('tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().live().in_menu()

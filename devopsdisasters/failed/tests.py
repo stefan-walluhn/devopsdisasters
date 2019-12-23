@@ -46,14 +46,14 @@ class TestFailedPage(WagtailPageTests):
         try:
             page.clean_fields(
                 exclude=['path', 'depth', 'title', 'slug', 'lessons_learned'])
-        except:
+        except Exception:
             self.fail('blank quote should not raise on validation')
 
     def test_fail(self):
         page = FailedPage(fail=[('paragraph', RichText('<p>failed fail</p>'))])
         self.assertEqual(page.fail.render_as_block(),
-                         '<div class="block-paragraph">' \
-                         '<div class="rich-text"><p>failed fail</p>' \
+                         '<div class="block-paragraph">'
+                         '<div class="rich-text"><p>failed fail</p>'
                          '</div></div>')
 
     def test_lessons_learned(self):
