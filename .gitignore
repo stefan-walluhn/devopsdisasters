@@ -1,7 +1,9 @@
+devopsdisasters/static/lib/
+
 # django
 db.sqlite3
-static/
-media/
+/static/
+/media/
 
 # python
 __pycache__
@@ -10,7 +12,7 @@ __pycache__
 pip-selfcheck.json
 
 # virtualenv
-bin/
-include/
-lib/
-lib64
+/bin/
+/include/
+/lib/
+/lib64
