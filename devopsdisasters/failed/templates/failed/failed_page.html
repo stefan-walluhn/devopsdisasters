@@ -5,18 +5,20 @@
 {% block body_class %}template-failedpage{% endblock %}
 
 {% block content %}
-  <h1>{{ page.title }}</h1>
-
-  <p class="meta">{{ page.first_published_at }}</p>
-
+<div class="col-lg-8">
   {% if page.quote %}
-  <div class="quote"><p>{{ page.quote }}</p></div>
+  <h3 class="ctitle"><i>"{{ page.quote }}"</i></h3>
   {% endif %}
+  <p>
+    <csmall>Veröffentlicht: {{ page.first_published_at }}</csmall> |
+    <csmall2>Von: {{ page.owner }}</csmall>
+  </p>
 
-  <div class="fail">
-    {% include_block page.fail %}
-  </div>
+  {% include_block page.fail %}
 
-  <h2>Lessons learned?</h2>
-  <div class="lessons-learned">{{ page.lessons_learned|richtext }}</div>
+  <div class="spacing"></div>
+  <h3>Lessons learned?</h3>
+  <div class="hline"></div>
+  {{ page.lessons_learned|richtext }}
+</div>
 {% endblock %}

@@ -86,9 +86,27 @@
             {% include "includes/header.html" with parent=site_root calling_page=self %}
         {% endblock header %}
 
-        {% block content %}{% endblock %}
+        {% block headline %}
+            {% include "includes/headline.html" %}
+        {% endblock headline %}
+
+        <div class="container mtb">
+            <div class="row">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+
+        {% block footer %}
+            {% include "includes/footer.html" %}
+        {% endblock %}
+
+        {% block copyright %}
+            {% include "includes/copyright.html" %}
+        {% endblock %}
 
         {# Global javascript #}
+        <script type="text/javascript" src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/bootstrap/js/bootstrap.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/devopsdisasters.js' %}"></script>
 
         {% block extra_js %}
