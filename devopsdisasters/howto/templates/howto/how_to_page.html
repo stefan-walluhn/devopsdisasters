@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-howtopage{% endblock %}
+
+{% block content %}
+<div class="col-lg-8">
+  {{ page.content|richtext }}
+</div>
+<div class="col-lg-4">
+  <h4>Kategorien</h4>
+  <div class="hline"></div>
+  {% for category in page.categories.all %}
+  <p><a href="#"><i class="fa fa-angle-right"></i> {{ category.name }}</a></p>
+  {% endfor %}
+</div>
+{% endblock %}

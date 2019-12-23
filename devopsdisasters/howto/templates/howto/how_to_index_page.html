@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load filter_tags %}
+
+{% block body_class %}template-howtoindexpage{% endblock %}
+
+{% block content %}
+{% for category in categories %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <h3 class="ctitle">{{ category.name }}</h3>
+      <div class="hline"></div>
+      {{ category.intro|richtext }}
+    </div>
+    <div class="col-lg-8">
+      {% for howto in howtos|value_from_dict:category.name %}
+      <a href="{% pageurl howto %}"><h4 class="ctitle">{{ howto.title }}</h3></a>
+      <p>{{ howto.abstract }}</p>
+      <p><a href="{% pageurl howto %}">[weiterlesen]</a></p>
+      {% endfor %}
+      <div class="hline"></div>
+      <h4>Links</h4>
+      <p><a href="#"><i class="fa fa-angle-right"></i> Wordpress</a></p>
+    </div>
+  </div>
+</div>
+<div class="spacing"></div>
+{% endfor %}
+
+{% endblock %}

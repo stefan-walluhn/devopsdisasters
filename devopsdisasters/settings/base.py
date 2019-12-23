@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'devopsdisasters.categories',
     'devopsdisasters.failed',
     'devopsdisasters.home',
+    'devopsdisasters.howto',
     'devopsdisasters.search',
 
     'wagtail.contrib.forms',

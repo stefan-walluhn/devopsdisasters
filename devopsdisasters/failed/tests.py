@@ -41,7 +41,7 @@ class TestFailedPage(WagtailPageTests):
         page = FailedPage(quote="failed quote")
         self.assertEqual(page.quote, 'failed quote')
 
-    def test_can_be_blank(self):
+    def test_quote_can_be_blank(self):
         page = FailedPage()
         try:
             page.clean_fields(

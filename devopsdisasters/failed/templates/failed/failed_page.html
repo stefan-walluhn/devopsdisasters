@@ -21,4 +21,11 @@
   <div class="hline"></div>
   {{ page.lessons_learned|richtext }}
 </div>
+<div class="col-lg-4">
+  <h4>Kategorien</h4>
+  <div class="hline"></div>
+  {% for category in page.categories.all %}
+  <p><a href="#"><i class="fa fa-angle-right"></i> {{ category.name }}</a></p>
+  {% endfor %}
+</div>
 {% endblock %}
