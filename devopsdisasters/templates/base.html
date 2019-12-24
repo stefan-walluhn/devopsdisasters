@@ -90,11 +90,7 @@
             {% include "includes/headline.html" %}
         {% endblock headline %}
 
-        <div class="container mtb">
-            <div class="row">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
+        {% block content %}{% endblock %}
 
         {% block footer %}
             {% include "includes/footer.html" %}

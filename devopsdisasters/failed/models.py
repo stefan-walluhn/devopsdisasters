@@ -11,6 +11,8 @@ from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
 
+from devopsdisasters.categories.models import Category
+
 
 class FailedIndexPage(Page):
     subpage_types = ['failed.FailedPage']
@@ -29,6 +31,8 @@ class FailedIndexPage(Page):
         context = super().get_context(request)
         context['fails'] = (self.get_children().live()
                             .order_by('-first_published_at'))
+        context['categories'] = Category.objects.all()
+
         return context
 
 

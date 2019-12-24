@@ -1,30 +1,38 @@
 {% extends "base.html" %}
 
 {% load wagtailcore_tags %}
+{% load static %}
 
 {% block body_class %}template-failedindexpage{% endblock %}
 
 {% block content %}
-<div class="col-lg-8">
-  {{ page.intro|richtext }}
+<div class="container mtb">
+  <div class="row">
+    <div class="col-lg-8">
+      <p><img class="img-responsive" src="{% static 'img/failed.jpg' %}"></p>
+      {{ page.intro|richtext }}
 
-  {% for fail in fails %}
-  <div class="hline"></div>
-  <div class="spacing"></div>
-  <a href="{% pageurl fail %}"><h3 class="ctitle">{{ fail.title }}</h3></a>
-  <p>
-    <csmall>Veröffentlicht: {{ fail.first_published_at }}</csmall> |
-    <csmall2>Von: {{ fail.owner }}</csmall>
-  </p>
-  {% include_block fail.specific.fail|first %}
-  <p><a href="{% pageurl fail %}">[weiterlesen]</a></p>
-  {% endfor %}
+      {% for fail in fails %}
+      <div class="hline"></div>
+      <div class="spacing"></div>
+      <a href="{% pageurl fail %}"><h3 class="ctitle">{{ fail.title }}</h3></a>
+      <p>
+        <csmall>Veröffentlicht: {{ fail.first_published_at }}</csmall> |
+        <csmall2>Von: {{ fail.owner }}</csmall>
+      </p>
+      {% include_block fail.specific.fail|first %}
+      <p><a href="{% pageurl fail %}">[weiterlesen]</a></p>
+      {% endfor %}
 
-</div>
+    </div>
 
-<div class="col-lg-4">
-  <h4>Kategorien</h4>
-  <div class="hline"></div>
-  <p><a href="#"><i class="fa fa-angle-right"></i> Wordpress</a></p>
+    <div class="col-lg-4">
+      <h4>Kategorien</h4>
+      <div class="hline"></div>
+      {% for category in categories %}
+      <p><a href="#"><i class="fa fa-angle-right"></i> {{ category.name }}</a></p>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}
