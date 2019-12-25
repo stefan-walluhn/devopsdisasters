@@ -27,7 +27,14 @@
       <h4>Kategorien</h4>
       <div class="hline"></div>
       {% for category in page.categories.all %}
-      <p><a href="#"><i class="fa fa-angle-right"></i> {{ category.name }}</a></p>
+      <p><i class="fa fa-angle-right"></i> {{ category.name }}</p>
+      {% endfor %}
+    </div>
+    <div class="col-lg-4">
+      <h4>Neuste Fails</h4>
+      <div class="hline"></div>
+      {% for fail in recent_fails %}
+      <p><a href="{% pageurl fail %}"><i class="fa fa-angle-right"></i> {{ fail.title }}</a></p>
       {% endfor %}
     </div>
   </div>

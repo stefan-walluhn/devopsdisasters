@@ -65,3 +65,11 @@ class FailedPage(Page):
 
     parent_page_types = ['failed.FailedIndexPage']
     subpage_types = []
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['recent_fails'] = (self.get_siblings().live()
+                                   .order_by('-first_published_at')[:5])
+        context['categories'] = Category.objects.all()
+
+        return context
