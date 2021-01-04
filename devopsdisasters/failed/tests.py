@@ -51,10 +51,9 @@ class TestFailedPage(WagtailPageTests):
 
     def test_fail(self):
         page = FailedPage(fail=[('paragraph', RichText('<p>failed fail</p>'))])
-        self.assertEqual(page.fail.render_as_block(),
-                         '<div class="block-paragraph">'
-                         '<div class="rich-text"><p>failed fail</p>'
-                         '</div></div>')
+        self.assertEqual(
+            page.fail.render_as_block(),
+            '<div class="block-paragraph"><p>failed fail</p></div>')
 
     def test_lessons_learned(self):
         page = FailedPage(lessons_learned="<p>failed lessons learned</p>")
