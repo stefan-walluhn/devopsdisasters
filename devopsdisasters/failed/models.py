@@ -1,10 +1,12 @@
 from django.db import models
 from django.forms import CheckboxSelectMultiple
+from django.http import Http404
 
 from modelcluster.fields import ParentalManyToManyField
 
 from wagtail.admin.edit_handlers import (
     FieldPanel, StreamFieldPanel, MultiFieldPanel)
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
@@ -14,7 +16,7 @@ from wagtail.search import index
 from devopsdisasters.categories.models import Category
 
 
-class FailedIndexPage(Page):
+class FailedIndexPage(RoutablePageMixin, Page):
     subpage_types = ['failed.FailedPage']
 
     intro = RichTextField()
@@ -29,13 +31,13 @@ class FailedIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['fails'] = self.get_fails().order_by('-first_published_at')
+        context['fails'] = self.get_fails()
         context['categories'] = self.get_all_categories()
 
         return context
 
     def get_all_categories(self):
-        return Category.objects.all()
+        return Category.objects.all().order_by('name')
 
     def get_fails(self, category=None):
         fails = FailedPage.objects.live().descendant_of(self)
@@ -43,7 +45,18 @@ class FailedIndexPage(Page):
         if category:
             fails = fails.filter(categories=category)
 
-        return fails
+        return fails.order_by('-first_published_at')
+
+    @route(r'^category/([\w-]+)/$')
+    def category(self, request, name):
+        try:
+            category = Category.objects.get(name=name)
+        except Category.DoesNotExist:
+            raise Http404("Category does not exist")
+
+        return self.render(request, context_overrides={
+            'fails': self.get_fails(category=category)
+        })
 
 
 class FailedPage(Page):

@@ -31,14 +31,14 @@ class TestFailedIndexPage(DevopsDisastersFixture, WagtailPageTests):
         page = FailedIndexPage()
         self.assertListEqual(
             [category.name for category in page.get_all_categories()],
-            ['foo_category', 'bar_category']
+            ['bar_category', 'foo_category']
         )
 
     def test_get_fails(self):
         page = FailedIndexPage.objects.first()
         self.assertListEqual(
             [fail.title for fail in page.get_fails()],
-            ['foo_fail', 'bar_fail']
+            ['bar_fail', 'foo_fail']
         )
 
     def test_get_fails_by_category(self):
