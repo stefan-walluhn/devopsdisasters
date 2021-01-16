@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.forms import CheckboxSelectMultiple
 from django.http import Http404
@@ -47,10 +48,10 @@ class FailedIndexPage(RoutablePageMixin, Page):
 
         return fails.order_by('-first_published_at')
 
-    @route(r'^category/([\w-]+)/$')
-    def category(self, request, name):
+    @route(r'^{}/([\w-]+)/$'.format(settings.DEVOPSDISASTERS_CATEGORY_ROUTE))
+    def category(self, request, slug):
         try:
-            category = Category.objects.get(name=name)
+            category = Category.objects.get(slug=slug)
         except Category.DoesNotExist:
             raise Http404("Category does not exist")
 
