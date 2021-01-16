@@ -6,9 +6,10 @@ from wagtail.tests.utils import WagtailPageTests
 from devopsdisasters.categories.models import Category
 from devopsdisasters.home.models import HomePage
 from devopsdisasters.failed.models import FailedIndexPage, FailedPage
+from devopsdisasters.base.tests import DevopsDisastersFixture
 
 
-class TestFailedIndexPage(WagtailPageTests):
+class TestFailedIndexPage(DevopsDisastersFixture, WagtailPageTests):
     def test_can_create_under_home_page(self):
         self.assertCanCreateAt(HomePage, FailedIndexPage)
 
@@ -25,6 +26,28 @@ class TestFailedIndexPage(WagtailPageTests):
             page.full_clean()
 
         self.assertIn('intro', ve.exception.error_dict)
+
+    def test_get_categories(self):
+        page = FailedIndexPage()
+        self.assertListEqual(
+            [category.name for category in page.get_all_categories()],
+            ['foo_category', 'bar_category']
+        )
+
+    def test_get_fails(self):
+        page = FailedIndexPage.objects.first()
+        self.assertListEqual(
+            [fail.title for fail in page.get_fails()],
+            ['foo_fail', 'bar_fail']
+        )
+
+    def test_get_fails_by_category(self):
+        page = FailedIndexPage.objects.first()
+        category = Category.objects.get(name='foo_category')
+        self.assertListEqual(
+            [fail.title for fail in page.get_fails(category=category)],
+            ['foo_fail']
+        )
 
 
 class TestFailedPage(WagtailPageTests):

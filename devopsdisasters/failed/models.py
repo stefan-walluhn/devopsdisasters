@@ -29,11 +29,21 @@ class FailedIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['fails'] = (self.get_children().live()
-                            .order_by('-first_published_at'))
-        context['categories'] = Category.objects.all()
+        context['fails'] = self.get_fails().order_by('-first_published_at')
+        context['categories'] = self.get_all_categories()
 
         return context
+
+    def get_all_categories(self):
+        return Category.objects.all()
+
+    def get_fails(self, category=None):
+        fails = FailedPage.objects.live().descendant_of(self)
+
+        if category:
+            fails = fails.filter(categories=category)
+
+        return fails
 
 
 class FailedPage(Page):
