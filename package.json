@@ -1,0 +1,28 @@
+{
+  "name": "devopsdisasters",
+  "version": "1.0.0",
+  "description": "JS assets for DevopsDisasters",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefan-walluhn/devopsdisasters.git"
+  },
+  "author": "Stefan Walluhn",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/stefan-walluhn/devopsdisasters/issues"
+  },
+  "homepage": "https://github.com/stefan-walluhn/devopsdisasters#readme"
+}

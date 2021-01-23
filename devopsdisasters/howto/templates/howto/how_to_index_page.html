@@ -9,12 +9,12 @@
 {% for category in categories %}
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <h3 class="ctitle">{{ category.name }}</h3>
       <div class="hline"></div>
       {{ category.intro|richtext }}
     </div>
-    <div class="col-lg-8">
+    <div class="col-md-8">
       {% for howto in howtos|value_from_dict:category.name %}
       <a href="{% pageurl howto %}"><h4 class="ctitle">{{ howto.title }}</h3></a>
       <p>{{ howto.abstract }}</p>

@@ -11,6 +11,9 @@ __pycache__
 # pip
 pip-selfcheck.json
 
+# npm
+/node_modules/
+
 # virtualenv
 /bin/
 /include/

@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-md-8">
       {% if page.quote %}
       <h3 class="ctitle"><i>"{{ page.quote }}"</i></h3>
       {% endif %}
@@ -23,14 +23,14 @@
       <div class="hline"></div>
       {{ page.lessons_learned|richtext }}
     </div>
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <h4>Kategorien</h4>
       <div class="hline"></div>
       {% for category in page.categories.all %}
       <p><i class="fa fa-angle-right"></i> {{ category.name }}</p>
       {% endfor %}
     </div>
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <h4>Neuste Fails</h4>
       <div class="hline"></div>
       {% for fail in recent_fails %}
