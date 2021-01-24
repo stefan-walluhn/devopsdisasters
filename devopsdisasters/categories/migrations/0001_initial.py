@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                                         primary_key=True,
                                         serialize=False,
                                         verbose_name='ID')),
-                ('name', models.CharField(max_length=250)),
+                ('name', models.CharField(unique=True, max_length=250)),
                 ('intro', wagtail.core.fields.RichTextField()),
             ],
             options={
