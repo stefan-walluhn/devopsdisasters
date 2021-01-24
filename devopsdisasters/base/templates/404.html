@@ -1,9 +1,28 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block body_class %}template-404{% endblock %}
 
-{% block content %}
-    <h1>Page not found</h1>
+{% block headline %}
+<div id="headerwrap">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h1>Page not found</h1>
+      </div>
+      <div class="col-md-8 offset-md-2 himg">
+        <img src="{% static 'img/404.jpg' %}" class="img-responsive">
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock headline %}
 
+{% block content %}
+<div class="container mtb">
+  <div class="row justify-content-center">
     <h2>Sorry, this page could not be found.</h2>
+  </div>
+</div>
 {% endblock %}
