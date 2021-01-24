@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+<h4>Kategorien</h4>
+<div class="hline"></div>
+{% for category in categories %}
+<p><a href="{% pageurl base_page %}category/{{ category.slug }}"><i class="fa fa-angle-right"></i> {{ category.name }}</a></p>
+{% endfor %}
