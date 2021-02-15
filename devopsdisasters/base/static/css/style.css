@@ -534,3 +534,9 @@ csmall2 {
 .credits {
   color: #fff;
 }
+
+/* Example Code */
+.example_code_source {
+	font-size: 12px;
+	color: #b3b3b3;
+}

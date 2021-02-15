@@ -15,6 +15,7 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
 
 from devopsdisasters.categories.models import Category
+from devopsdisasters.failed.blocks import ExampleCode
 
 
 class FailedIndexPage(RoutablePageMixin, Page):
@@ -66,10 +67,7 @@ class FailedPage(Page):
     fail = StreamField([
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
-        ('example_code', blocks.StructBlock([
-            ('code', blocks.BlockQuoteBlock()),
-            ('source', blocks.URLBlock(required=False)),
-        ])),
+        ('example_code', ExampleCode()),
     ])
     lessons_learned = RichTextField()
 
